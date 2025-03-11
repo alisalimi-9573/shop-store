@@ -5,6 +5,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #db4444;
+  --secondary: #00ff66;
+  --radius: 5px;
+  --sectionMarginBottom: 150px;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,3 +30,19 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@import "./allProducts.css";
+@import "./form.css";
+@import "./sign-up.css";
+@import "./not-found.css";
+@import "./carts.css";
+@import "../components/nav/navbar.css";
+@import "../components/headerSlider/headerSlider.css";
+@import "../components/headerContent/dynamicHeader.css";
+@import "../components/button/button.css";
+@import "../components/bestProducts/bestProducts.css";
+@import "../components/categories/categories.css";
+@import "../components/serviseSection/serviceSection.css";
+@import "../components/footer/footer.css";
+@import "../components/breadCrumbs/breadcrumbs.css";
+@import "../pages/products/products.css";

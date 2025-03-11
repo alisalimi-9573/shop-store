@@ -1,0 +1,11 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 170px 0;
+  gap: 35px;
+}
+.not-found-text {
+  font-size: 80px;
+}

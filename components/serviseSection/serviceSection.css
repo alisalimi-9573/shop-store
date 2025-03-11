@@ -1,0 +1,21 @@
+.service_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: var(--sectionMarginBottom);
+}
+.service_section_items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-width: 250px;
+  height: 170px;
+}
+.service_section_items_img {
+}
+
+.service_section_items_text {
+}

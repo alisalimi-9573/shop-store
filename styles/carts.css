@@ -1,0 +1,17 @@
+.carts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.carts_items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  margin: 15px 0;
+  padding: 0.5rem 0.5rem;
+  box-shadow: 1px 0px 5px #ddd;
+  border-radius: 2px;
+  font-size: 14px;
+}

@@ -1,0 +1,36 @@
+.slider-container {
+  width: 100%;
+  overflow: visible !important;
+  margin-bottom: var(--sectionMarginBottom);
+}
+.img_slider {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+.slider_box {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.inner_box {
+  z-index: 10;
+  text-align: center;
+  width: 5%;
+  height: 147px;
+  color: #eee;
+  position: absolute;
+  bottom: 101px;
+}
+
+.slider_link {
+  transition: all 0.2s ease;
+}
+.arrow_link {
+  transition: transform 0.2s ease;
+  margin-left: 25px;
+}
+.slider_link:hover .arrow_link .icon {
+  transform: translateX(10px);
+}

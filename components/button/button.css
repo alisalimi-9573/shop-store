@@ -1,0 +1,15 @@
+.btn {
+  color: #eee;
+  background-color: var(--primary);
+  padding: 0.4rem 5rem;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+.btn_position {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.width {
+  width: 100%;
+}
