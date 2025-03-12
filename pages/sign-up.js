@@ -1,5 +1,4 @@
-import React from "react";
-import { addNewUser } from "../services/HTTPClient/HTTPClient";
+import React, { useContext } from "react";
 import Nvabar from "@/components/nav/Nvabar";
 import Button from "@/components/button/Button";
 import BreadCrumbs from "@/components/breadCrumbs/BreadCrumbs";
@@ -9,6 +8,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
+import { userContext } from "../contexts/UserContext";
 
 const schema = yup.object().shape({
   username: yup.string().required("userName is required"),
@@ -23,6 +23,7 @@ const schema = yup.object().shape({
 });
 
 export default function SignUp() {
+  const { signUp } = useContext(userContext);
   const router = useRouter();
   const {
     register,
@@ -32,16 +33,15 @@ export default function SignUp() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
-    console.log("Form Data:", data);
-    try {
-      const newUserResponse = await addNewUser(data);
-      console.log("newUserResponse", newUserResponse);
-      localStorage.setItem("user", JSON.stringify(data));
-      router.push("./login");
-    } catch (error) {
-      console.log("signUpSubmitError", error);
-    }
+  const onSubmit = (data) => {
+    signUp({
+      id: Date.now(),
+      userName: data.username,
+      email: data.email,
+      password: data.password,
+    });
+    router.push("./login");
+    console.log("User sign up data:", data);
   };
 
   return (

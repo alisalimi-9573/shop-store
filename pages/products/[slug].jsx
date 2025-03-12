@@ -7,6 +7,8 @@ import Footer from "@/components/footer/Footer";
 import Button from "@/components/button/Button";
 import { Container } from "@mui/material";
 import { useState } from "react";
+import { useContext } from "react";
+import { userContext } from "../../contexts/UserContext";
 
 const size = ["XS", "S", "M", "L", "XL"];
 
@@ -40,22 +42,19 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Products({ product }) {
+  const { addSelectedItemsToCarts } = useContext(userContext);
+
   const sizeList = size.map((size) => {
     return <div className="size_list">{size}</div>;
   });
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count > 1 ? count - 1 : 1);
 
-  // بخاطر مشکل داشتن api مجبور شدم ادامه پروژه رو با localStorage پیش ببرم
-  function handleAddToCard() {
-    const cards = {
-      productId: product.id,
-      quantity: count,
-    };
-    localStorage.setItem("cards", JSON.stringify(cards));
+  function handleAddToCarts() {
+    addSelectedItemsToCarts({});
   }
 
   return (
@@ -91,7 +90,7 @@ export default function Products({ product }) {
                       +
                     </button>
                   </div>
-                  <Button onClick={handleAddToCard} btnText="Add To Card" />
+                  <Button onClick={handleAddToCarts} btnText="Add To Card" />
                 </div>
               </div>
               <div className="product_detail_delivery">

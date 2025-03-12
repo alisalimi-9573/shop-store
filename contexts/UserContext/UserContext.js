@@ -1,20 +1,64 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
+import { initialState, reducer } from "./reducer";
 
 export const userContext = createContext();
 
 export function UserProvider({ children }) {
-  const [userData, setUserData] = useState(null);
-  console.log("user data", userData);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const login = (myUserData) => {
-    localStorage.setItem("user", myUserData.email);
-    setUserData(myUserData);
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      const existingUser = initialState.userData.find(
+        (user) => user.id === userId
+      );
+      if (existingUser) {
+        dispatch({
+          type: "login_user",
+          payload: existingUser,
+        });
+      }
+    }
+  }, []);
+
+  const signUp = (user) => {
+    dispatch({
+      type: "sign_up_user",
+      payload: user,
+    });
+  };
+
+  const login = (user) => {
+    dispatch({
+      type: "login_user",
+      payload: user,
+    });
+  };
+
+  const logout = () => {
+    dispatch({
+      type: "logout_user",
+    });
+  };
+
+  const addSelectedItemsToCarts = (items) => {
+    dispatch({
+      type: "add_to_carts",
+      payload: items,
+    });
   };
 
   return (
-    <userContext.Provider value={{ login, userData }}>
+    <userContext.Provider
+      value={{
+        login,
+        state,
+        signUp,
+        logout,
+        addSelectedItemsToCarts,
+      }}
+    >
       {children}
     </userContext.Provider>
   );
 }
-//

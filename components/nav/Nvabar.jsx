@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from "react";
 import LoginIcon from "@mui/icons-material/Login";
+import SettingsPowerIcon from "@mui/icons-material/SettingsPower";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,8 +9,7 @@ import { userContext } from "../../contexts/UserContext";
 
 export default function Nvabar() {
   const searchInput = useRef(null);
-
-  const { userData } = useContext(userContext);
+  const { state, logout } = useContext(userContext);
 
   const searchInputHandler = () => {
     // console.log("ok");
@@ -54,9 +54,17 @@ export default function Nvabar() {
           </span>
         </div>
         <div>
-          <Link href="./sign-up">
-            <LoginIcon fontSize="small" />
-          </Link>
+          {state.isLoggedIn === true ? (
+            <div>
+              <button onClick={logout}>
+                <SettingsPowerIcon fontSize="small" />
+              </button>
+            </div>
+          ) : (
+            <Link href="./sign-up">
+              <LoginIcon fontSize="small" />
+            </Link>
+          )}
         </div>
         <div>
           <Link href={"./carts"}>

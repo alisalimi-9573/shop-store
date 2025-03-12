@@ -1,5 +1,6 @@
 import { TextField } from "@mui/material";
 import Button from "@/components/button/Button";
+import { useContext } from "react";
 import Nvabar from "@/components/nav/Nvabar";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -7,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import BreadCrumbs from "@/components/breadCrumbs/BreadCrumbs";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { userContext } from "../contexts/UserContext/UserContext";
 
 const schema = yup.object().shape({
   username: yup.string().required("User name is required"),
@@ -16,6 +18,8 @@ const schema = yup.object().shape({
 export default function Login() {
   const router = useRouter();
   const [formError, setFormError] = useState("");
+  const { state, login } = useContext(userContext);
+  console.log(" reducer state in login component", state.userData);
 
   const {
     register,
@@ -25,39 +29,21 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  // const onSubmit = async (data) => {
-  //   console.log("login data:", data);
-  //   try {
-  //     const loginData = await loginUser(data);
+  const onSubmit = (data) => {
+    const user = state.userData.find(
+      (user) =>
+        user.userName === data.username && user.password === data.password
+    );
 
-  //     if (loginData && loginData.token) {
-  //       localStorage.setItem("authToken", loginData.token);
-  //       console.log("Token received:", loginData.token);
+    console.log("user finded", user);
 
-  //       router.push("/");
-  //     } else {
-  //       setFormError("Invalid username or password");
-  //     }
-  //   } catch (error) {
-  //     console.log("Login error:", error);
-  //     setFormError("Login failed. Please try again.");
-  //   }
-  // };
-
-  const onSubmit = async (data) => {
-    console.log("login data :", data);
-    try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (user.username === data.username && user.password === data.password) {
-        router.push("./");
-      } else {
-        alert("username or pasword wrong");
-      }
-    } catch (error) {
-      console.log(error.messaage);
+    if (user) {
+      login(user);
+      router.push("./");
+    } else {
+      setFormError("Invalid username or password");
     }
   };
-
   return (
     <>
       <Nvabar />
