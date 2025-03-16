@@ -28,9 +28,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const product = await fetchProductById(params.slug);
-  const index = params.slug - 1;
 
-  if (!product || product.length === 0) {
+  console.log("Fetched product:", product);
+
+  if (!product) {
     return {
       notFound: true,
     };
@@ -38,7 +39,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      product: product[index],
+      product,
     },
   };
 }

@@ -8,17 +8,23 @@ const api = axios.create({
 });
 
 export const fetchProducts = async () => {
-  const response = await api.get("/products");
-  return response.data;
+  try {
+    const response = await api.get("/products");
+    return response.data;
+  } catch (error) {
+    console.log("erroe fetching products:", error);
+    return [];
+  }
 };
 
 export const fetchProductById = async (id) => {
-  const response = await api.get(`/products`, {
-    params: {
-      id,
-    },
-  });
-  return response.data;
+  try {
+    const response = await api.get(`/products/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching product with ID ${id}:`, error);
+    return null;
+  }
 };
 
 export const fetchCart = async () => {
