@@ -13,10 +13,20 @@ import { userContext } from "../contexts/UserContext";
 export default function Home() {
   const { userData } = useContext(userContext);
 
+  // useEffect(() => {
+  //   localStorage.getItem("userId");
+  //   console.log("user login data", userData);
+  // }, [userData]);
   useEffect(() => {
-    localStorage.getItem("user");
-    console.log("user login data", userData);
-  }, [userData]);
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("userId");
+      localStorage.removeItem("carts");
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>

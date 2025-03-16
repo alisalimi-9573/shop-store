@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 const initialState = {
   userData: [],
   isLoggedIn: false,
@@ -25,6 +27,9 @@ function reducer(state = initialState, action) {
       };
     case "logout_user":
       localStorage.removeItem("userId");
+      localStorage.removeItem("carts");
+      const router = useRouter();
+      router.push("./");
       return {
         ...state,
         isLoggedIn: false,
@@ -32,7 +37,7 @@ function reducer(state = initialState, action) {
     case "add_to_carts":
       return {
         ...state,
-        carts: [...state, action.payload],
+        carts: action.payload,
       };
     default:
       state;

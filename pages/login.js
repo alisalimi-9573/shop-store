@@ -9,6 +9,7 @@ import BreadCrumbs from "@/components/breadCrumbs/BreadCrumbs";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { userContext } from "../contexts/UserContext/UserContext";
+import Link from "next/link";
 
 const schema = yup.object().shape({
   username: yup.string().required("User name is required"),
@@ -84,7 +85,7 @@ export default function Login() {
 
           <div className="form_footer">
             <Button type="submit" btnText="LogIn" />
-            <a href="#">Forget Password?</a>
+            <Link href={"./sign-up"}>Create Account</Link>
           </div>
         </form>
       </section>

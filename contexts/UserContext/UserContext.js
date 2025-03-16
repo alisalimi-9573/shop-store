@@ -5,6 +5,7 @@ export const userContext = createContext();
 
 export function UserProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log("context state", state);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -41,10 +42,10 @@ export function UserProvider({ children }) {
     });
   };
 
-  const addSelectedItemsToCarts = (items) => {
+  const addSelectedItemsToCarts = (carts) => {
     dispatch({
       type: "add_to_carts",
-      payload: items,
+      payload: carts,
     });
   };
 

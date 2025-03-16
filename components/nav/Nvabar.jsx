@@ -26,16 +26,16 @@ export default function Nvabar() {
       <div id="menu" className="menu">
         <ul className="flex gap-4">
           <li className="menu_items">
-            <a href="#">home</a>
+            <Link href={"./"}>Home</Link>
           </li>
           <li className="menu_items">
-            <a href="#">contact</a>
+            <a href="#">Contact</a>
           </li>
           <li className="menu_items">
-            <a href="#">about</a>
+            <Link href={"./products"}>Products</Link>
           </li>
           <li className="menu_items">
-            <a href="#">sign up</a>
+            <a href="#">Sign Up</a>
           </li>
         </ul>
       </div>
@@ -67,9 +67,15 @@ export default function Nvabar() {
           )}
         </div>
         <div>
-          <Link href={"./carts"}>
-            <AddShoppingCartIcon fontSize="small" />
-          </Link>
+          {state.isLoggedIn === true ? (
+            <Link href={"./carts"}>
+              <AddShoppingCartIcon fontSize="small" />
+            </Link>
+          ) : (
+            <Link href={"./sign-up"}>
+              <AddShoppingCartIcon fontSize="small" />
+            </Link>
+          )}
         </div>
       </div>
       <div id="ham_menu" className="hamburger hidden">

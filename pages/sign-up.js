@@ -91,7 +91,7 @@ export default function SignUp() {
           <p>
             Already have an account?
             <Link className="link" href="./login">
-              Log In
+              <span> LogIn</span>
             </Link>
           </p>
         </div>

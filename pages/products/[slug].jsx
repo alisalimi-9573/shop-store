@@ -9,6 +9,8 @@ import { Container } from "@mui/material";
 import { useState } from "react";
 import { useContext } from "react";
 import { userContext } from "../../contexts/UserContext";
+import Router from "next/router";
+import { useRouter } from "next/navigation";
 
 const size = ["XS", "S", "M", "L", "XL"];
 
@@ -43,7 +45,7 @@ export async function getStaticProps({ params }) {
 
 export default function Products({ product }) {
   const { addSelectedItemsToCarts } = useContext(userContext);
-
+  const router = useRouter();
   const sizeList = size.map((size) => {
     return <div className="size_list">{size}</div>;
   });
@@ -53,8 +55,106 @@ export default function Products({ product }) {
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count > 1 ? count - 1 : 1);
 
+  function generateUniqueId() {
+    return Math.random().toString(36).substr(2, 8);
+  }
+
+  // function handleAddToCarts() {
+  //   const userId = JSON.parse(localStorage.getItem("userId"));
+  //   const carts = {
+  //     id: generateUniqueId(),
+  //     userId: userId,
+  //     products: [{ productId: product.id, quantity: count }],
+  //   };
+  //   addSelectedItemsToCarts(carts);
+  // }
+  // function handleAddToCarts() {
+  //   const userId = JSON.parse(localStorage.getItem("userId"));
+
+  //   if (!!userId) {
+  //     const existingCart = JSON.parse(localStorage.getItem("carts")) || [];
+
+  //     let updatedCarts = existingCart;
+
+  //     if (!existingCart.find((cart) => cart.userId === userId)) {
+  //       updatedCarts = [
+  //         ...existingCart,
+  //         {
+  //           id: generateUniqueId(),
+  //           userId: userId,
+  //           products: [{ productId: product.id, quantity: count }],
+  //         },
+  //       ];
+  //     } else {
+  //       updatedCarts = existingCart.map((cart) => {
+  //         if (cart.userId === userId) {
+  //           const existingProductIndex = cart.products.findIndex(
+  //             (p) => p.productId === product.id
+  //           );
+  //           if (existingProductIndex !== -1) {
+  //             cart.products[existingProductIndex].quantity += count; //
+  //           } else {
+  //             cart.products.push({ productId: product.id, quantity: count });
+  //           }
+  //         }
+  //         return cart;
+  //       });
+  //     }
+  //     localStorage.setItem("carts", JSON.stringify(updatedCarts));
+  //     router.push("http://localhost:3000/carts");
+  //     addSelectedItemsToCarts(updatedCarts);
+  //   } else {
+  //     router.push("http://localhost:3000/sign-up");
+  //   }
+  // }
+
   function handleAddToCarts() {
-    addSelectedItemsToCarts({});
+    const userId = JSON.parse(localStorage.getItem("userId"));
+
+    if (!!userId) {
+      const existingCart = JSON.parse(localStorage.getItem("carts")) || [];
+
+      let updatedCarts = existingCart;
+
+      if (!existingCart.find((cart) => cart.userId === userId)) {
+        updatedCarts = [
+          ...existingCart,
+          {
+            id: generateUniqueId(),
+            userId: userId,
+            products: [
+              {
+                product: product,
+                quantity: count,
+              },
+            ],
+          },
+        ];
+      } else {
+        updatedCarts = existingCart.map((cart) => {
+          if (cart.userId === userId) {
+            cart.products = cart.products || [];
+            const existingProductIndex = cart.products.findIndex(
+              (p) => p.product && p.product.id === product.id
+            );
+            if (existingProductIndex !== -1) {
+              cart.products[existingProductIndex].quantity += count;
+            } else {
+              cart.products.push({
+                product: product,
+                quantity: count,
+              });
+            }
+          }
+          return cart;
+        });
+      }
+      localStorage.setItem("carts", JSON.stringify(updatedCarts));
+      router.push("http://localhost:3000/carts");
+      addSelectedItemsToCarts(updatedCarts);
+    } else {
+      router.push("http://localhost:3000/sign-up");
+    }
   }
 
   return (
@@ -90,6 +190,7 @@ export default function Products({ product }) {
                       +
                     </button>
                   </div>
+
                   <Button onClick={handleAddToCarts} btnText="Add To Card" />
                 </div>
               </div>
