@@ -32,10 +32,13 @@ export async function getStaticProps({ params }) {
     console.log("Fetched product:", product);
 
     if (!product) {
-      return {
-        notFound: true,
-      };
+      return <p>Loading...</p>;
     }
+    // if (!product) {
+    //   return {
+    //     notFound: true,
+    //   };
+    // }
 
     return {
       props: {
@@ -44,7 +47,7 @@ export async function getStaticProps({ params }) {
     };
   } catch (error) {
     console.error("Error in getStaticProps:", error.message);
-    return { notFound: true };
+    return { props: { product: null } };
   }
 }
 
