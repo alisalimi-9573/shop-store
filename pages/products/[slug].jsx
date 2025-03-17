@@ -22,26 +22,30 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const product = await fetchProductById(params.slug);
+  try {
+    const product = await fetchProductById(params.slug);
+    console.log("Fetched product:", product);
 
-  console.log("Fetched product:", product);
+    if (!product) {
+      return {
+        notFound: true,
+      };
+    }
 
-  if (!product) {
     return {
-      notFound: true,
+      props: {
+        product,
+      },
     };
+  } catch (error) {
+    console.error("Error in getStaticProps:", error.message);
+    return { notFound: true };
   }
-
-  return {
-    props: {
-      product,
-    },
-  };
 }
 
 export default function Products({ product }) {

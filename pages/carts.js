@@ -7,8 +7,8 @@ import { userContext } from "../contexts/UserContext";
 
 export default function Carts() {
   const { state } = useContext(userContext);
-  const { carts } = state;
-  const buyingProducts = carts[0].products;
+  const { carts = [] } = state || {};
+  const buyingProducts = carts?.[0]?.products || [];
   console.log("buyingProducts in carts page", buyingProducts);
 
   function calculateTotalPrice() {
