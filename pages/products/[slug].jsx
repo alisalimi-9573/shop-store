@@ -13,18 +13,31 @@ import Router from "next/router";
 import { useRouter } from "next/navigation";
 
 const size = ["XS", "S", "M", "L", "XL"];
-
 export async function getStaticPaths() {
-  const products = await fetchProducts();
-  const paths = products.map((product) => ({
-    params: { slug: product.id.toString() },
-  }));
+  try {
+    const products = await fetchProducts();
+    const paths = products.map((product) => ({
+      params: { slug: product.id.toString() }, // یا هر مقداری که استفاده می‌کنید
+    }));
 
-  return {
-    paths,
-    fallback: true,
-  };
+    return { paths, fallback: "blocking" }; // برای مدیریت مسیرهای پویا
+  } catch (error) {
+    console.error("Error fetching paths:", error);
+    return { paths: [], fallback: false };
+  }
 }
+
+// export async function getStaticPaths() {
+//   const products = await fetchProducts();
+//   const paths = products.map((product) => ({
+//     params: { slug: product.id.toString() },
+//   }));
+
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
 
 export async function getStaticProps({ params }) {
   try {
@@ -32,13 +45,10 @@ export async function getStaticProps({ params }) {
     console.log("Fetched product:", product);
 
     if (!product) {
-      return <p>Loading...</p>;
+      return {
+        notFound: true,
+      };
     }
-    // if (!product) {
-    //   return {
-    //     notFound: true,
-    //   };
-    // }
 
     return {
       props: {
