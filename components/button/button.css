@@ -13,3 +13,8 @@
 .width {
   width: 100%;
 }
+@media (max-width: 680px) {
+  .btn {
+    padding: 0.1rem 3rem;
+  }
+}

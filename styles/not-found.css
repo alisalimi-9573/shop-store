@@ -9,3 +9,8 @@
 .not-found-text {
   font-size: 80px;
 }
+@media (max-width: 680px) {
+  .not-found-text {
+    font-size: 40px;
+  }
+}

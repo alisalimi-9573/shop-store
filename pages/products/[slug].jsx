@@ -17,10 +17,10 @@ export async function getStaticPaths() {
   try {
     const products = await fetchProducts();
     const paths = products.map((product) => ({
-      params: { slug: product.id.toString() }, // یا هر مقداری که استفاده می‌کنید
+      params: { slug: product.id.toString() },
     }));
 
-    return { paths, fallback: "blocking" }; // برای مدیریت مسیرهای پویا
+    return { paths, fallback: false };
   } catch (error) {
     console.error("Error fetching paths:", error);
     return { paths: [], fallback: false };

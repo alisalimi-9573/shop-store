@@ -39,9 +39,6 @@
   right: 4px;
   top: 7px;
 }
-/* .expanded {
-  width: 250px;  
-} */
 
 @media (min-width: 992px) and (max-width: 1024px) {
   .logo {
@@ -75,7 +72,7 @@
     transition: all 0.2s ease;
   }
   .expanded {
-    width: 220px;  
+    width: 220px;
   }
   .search_input:focus {
     width: 245px;
@@ -84,9 +81,115 @@
     font-size: 14px;
   }
 }
-@media (max-width:767px) {
+@media (max-width: 767px) {
   #ham_menu {
     display: block !important;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 680px) {
+  .logo {
+    font-size: 15px;
+  }
+  .search_box {
+    display: none;
+  }
+}
+
+/* استایل پایه */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  position: relative;
+}
+
+.logo {
+  font-weight: bolder;
+}
+
+.menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.menu_items a {
+  padding: 0.2rem 0;
+  text-decoration: none;
+  color: black;
+}
+
+.menu_items:hover a {
+  border-bottom: 1px solid black;
+}
+
+/* همبرگری */
+#ham_menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger {
+  font-size: 1.8rem;
+}
+
+/* منوی کشویی */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 25%;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: right 0.3s ease;
+}
+
+.drawer.open {
+  right: 0;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.close-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.drawer-menu {
+  list-style: none;
+  padding: 1rem;
+}
+
+.drawer-menu li {
+  margin-bottom: 1rem;
+}
+
+.drawer-menu li a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+}
+
+/* استایل ریسپانسیو */
+@media (max-width: 992px) {
+  .menu {
+    display: none;
+  }
+
+  #ham_menu {
+    display: block;
+  }
+}
+@media (max-width: 680px) {
+  .drawer {
+    width: 45%;
   }
 }

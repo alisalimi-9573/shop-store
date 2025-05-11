@@ -1,33 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { addNewUser, loginUser } from "../../services/HTTPClient/HTTPClient";
 
-// Async thunk برای ثبت‌نام کاربر
 export const signUp = createAsyncThunk(
   "auth/signUp",
   async (newUser, thunkAPI) => {
     try {
       const response = await addNewUser(newUser);
-      return response; // شامل id کاربر جدید
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
-
-// Async thunk برای ورود کاربر
 export const logIn = createAsyncThunk(
   "auth/logIn",
   async (userData, thunkAPI) => {
     try {
       const response = await loginUser(userData);
-      return response; // شامل token و id کاربر
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
-
-// Slice برای مدیریت وضعیت احراز هویت
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -42,11 +37,10 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
-      localStorage.removeItem("authToken"); // حذف توکن از Local Storage
+      localStorage.removeItem("authToken");
     },
   },
   extraReducers: (builder) => {
-    // Sign Up
     builder
       .addCase(signUp.pending, (state) => {
         state.loading = true;
@@ -60,8 +54,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-
-    // Log In
     builder
       .addCase(logIn.pending, (state) => {
         state.loading = true;
@@ -72,7 +64,7 @@ const authSlice = createSlice({
         state.user = { id: action.payload.id };
         state.token = action.payload.token;
         state.isAuthenticated = true;
-        localStorage.setItem("authToken", action.payload.token); // ذخیره توکن
+        localStorage.setItem("authToken", action.payload.token);
       })
       .addCase(logIn.rejected, (state, action) => {
         state.loading = false;

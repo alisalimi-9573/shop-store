@@ -43,7 +43,6 @@ import Stack from "@mui/material/Stack";
 //   );
 // }
 
-// کامپوننت درست
 export default function AllProducts() {
   const [allProducts, setAllProducts] = useState([]);
   console.log("all products", allProducts);
@@ -63,12 +62,9 @@ export default function AllProducts() {
   }, []);
 
   const indexOfLastProduct = currentPage * productsPerPage;
-
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-
   const currentProducts =
     allProducts && allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
   const totalPages = Math.ceil(
     allProducts && allProducts.length / productsPerPage
   );

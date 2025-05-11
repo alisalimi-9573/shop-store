@@ -18,8 +18,13 @@ function HeaderSlider() {
     <div className="slider-container">
       <Slider {...settings}>
         <div className="slide_box">
-          <img className="img_slider" src="/men.jpg" alt="men clothes" />
-          <div className="inner_box">
+          <img
+            className="img_slider"
+            src="/men.jpg
+"
+            alt="men clothes"
+          />
+          {/* <div className="inner_box">
             <p>kdkdkdkd</p>
             <button className="slider_link">
               click
@@ -27,11 +32,11 @@ function HeaderSlider() {
                 <ArrowForwardIcon className="icon" />
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="slide_box">
-          <img className="img_slider" src="jewerly.jpg" alt="jewerly" />
-          <div className="inner_box">
+          <img className="img_slider" src="/jewerly.jpg" alt="jewerly" />
+          {/* <div className="inner_box">
             <p>kdkdkdkd</p>
             <button className="slider_link">
               click
@@ -39,11 +44,11 @@ function HeaderSlider() {
                 <ArrowForwardIcon className="icon" />
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="slide_box">
-          <img className="img_slider" src="smartphone.jpg" alt="smartphone" />
-          <div className="inner_box">
+          <img className="img_slider" src="/smartphone.jpg" alt="smartphone" />
+          {/* <div className="inner_box">
             <p>kdkdkdkd</p>
             <button className="slider_link">
               click
@@ -51,11 +56,11 @@ function HeaderSlider() {
                 <ArrowForwardIcon className="icon" />
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="slide_box">
-          <img className="img_slider" src="women.webp" alt="women" />
-          <div className="inner_box">
+          <img className="img_slider" src="/women.webp" alt="women" />
+          {/* <div className="inner_box">
             <p>kdkdkdkd</p>
             <button className="slider_link">
               click
@@ -63,7 +68,7 @@ function HeaderSlider() {
                 <ArrowForwardIcon className="icon" />
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
       </Slider>
     </div>

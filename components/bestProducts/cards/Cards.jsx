@@ -1,26 +1,3 @@
-// import React from "react";
-
-// export default function Cards() {
-//   return (
-//     <>
-//       <div className="card_container">
-//         <div className="card_img_container">
-//           <img
-//             className="card_image"
-//             src="./astinboland.jpg"
-//             alt="astinboland"
-//           />
-//         </div>
-//         <div className="card_info">
-//           <p className="card_name">test</p>
-//           <p className="card_price">price</p>
-//           <p className="card_rate">stars</p>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";

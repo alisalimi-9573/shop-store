@@ -1,4 +1,4 @@
-// function for finding less cont that means best product selling
+// function for finding less count that means best product selling
 export function bestSelling(best) {
   if (best) {
     const bestSellingProducts = best.filter(

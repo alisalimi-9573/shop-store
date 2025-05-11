@@ -12,11 +12,6 @@ import { userContext } from "../contexts/UserContext";
 
 export default function Home() {
   const { userData } = useContext(userContext);
-
-  // useEffect(() => {
-  //   localStorage.getItem("userId");
-  //   console.log("user login data", userData);
-  // }, [userData]);
   useEffect(() => {
     const handleBeforeUnload = () => {
       localStorage.removeItem("userId");
