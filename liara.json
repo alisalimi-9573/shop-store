@@ -1,0 +1,11 @@
+{
+  "port": 3000,
+  "platform": "node",
+  "app": "boring-germain-ypjhuwij7",
+  "build": {
+    "location": "iran"
+  },
+  "node": {
+    "version": "20"
+  }
+}
